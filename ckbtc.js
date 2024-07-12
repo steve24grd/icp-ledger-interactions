@@ -79,6 +79,23 @@ function bytes_to_hex(bytes) {
 
         // console.log(result_1);
 
+        //----------------------------- TRANSFER ICP #1 ---------------------------------
+        // when subaccount is not supplied, the default subaccount is used
+        // default subaccount -> 0000000000000000000000000000000000000000000000000000000000000000
+        let args = {
+            from_subaccount: [],
+            to: {
+                owner: Principal.fromText(principal_hex),
+                subaccount: [],
+            },
+            amount: BigInt(3500000),
+            fee: [],
+            memo: [],
+            created_at_time: [],
+        };
+        let result = await ledger.call('icrc1_transfer', args);
+        console.log(result);
+
         //----------------------------- TRANSFER ICP #2 ---------------------------------
 
         // let args = {
