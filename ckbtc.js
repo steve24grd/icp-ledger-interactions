@@ -4,6 +4,7 @@ import * as bip39 from "bip39";
 import HDKey from "hdkey";
 import Secp256k1 from "secp256k1";
 import { Secp256k1KeyIdentity } from "@dfinity/identity-secp256k1";
+import { Principal } from '@dfinity/principal';
 
 // Define the BIP44 derivation path for ICP.
 const DERIVATION_PATH = "m/44'/223'/0'/0";
@@ -65,36 +66,36 @@ function bytes_to_hex(bytes) {
         // console.log(await ledger.call('icrc1_fee'));
 
         //------------------------- GET BALANCE (PRINCIPAL) -------------------------
-        // const account_1 = {
-        //     owner: Principal.fromText(
-        //         principal_hex,
-        //     ),
-        //     subaccount: [],
-        // };
+        const account_1 = {
+            owner: Principal.fromText(
+                principal_hex,
+            ),
+            subaccount: [],
+        };
 
-        // const result_1 = await ledger.call(
-        //     "icrc1_balance_of",
-        //     account_1,
-        // );
+        const result_1 = await ledger.call(
+            "icrc1_balance_of",
+            account_1,
+        );
 
-        // console.log(result_1);
+        console.log(result_1);
 
         //----------------------------- TRANSFER ICP #1 ---------------------------------
         // when subaccount is not supplied, the default subaccount is used
         // default subaccount -> 0000000000000000000000000000000000000000000000000000000000000000
-        let args = {
-            from_subaccount: [],
-            to: {
-                owner: Principal.fromText(principal_hex),
-                subaccount: [],
-            },
-            amount: BigInt(3500000),
-            fee: [],
-            memo: [],
-            created_at_time: [],
-        };
-        let result = await ledger.call('icrc1_transfer', args);
-        console.log(result);
+        // let args = {
+        //     from_subaccount: [],
+        //     to: {
+        //         owner: Principal.fromText(principal_hex),
+        //         subaccount: [],
+        //     },
+        //     amount: BigInt(3500000),
+        //     fee: [],
+        //     memo: [],
+        //     created_at_time: [],
+        // };
+        // let result = await ledger.call('icrc1_transfer', args);
+        // console.log(result);
 
         //----------------------------- TRANSFER ICP #2 ---------------------------------
 
